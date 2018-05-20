@@ -141,6 +141,12 @@ Contributor(s): .
             <version>2.4</version>
         </dependency>
 
+        <dependency>
+            <groupId>org.codehaus.plexus</groupId>
+            <artifactId>plexus-io</artifactId>
+            <version>3.0.1</version>
+        </dependency>
+
     </dependencies>
     <reporting>
         <plugins>

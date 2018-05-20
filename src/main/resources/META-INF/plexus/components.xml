@@ -29,7 +29,7 @@ Contributor(s): .
                 <packaging>jap</packaging>
                 <language>java</language>
                 <addedToClasspath>false</addedToClasspath>
-                <includesDependencies>false</includesDependencies>
+                <includesDependencies>true</includesDependencies>
             </configuration>
         </component>
         <component>

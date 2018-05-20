@@ -50,7 +50,7 @@ public abstract class AbstractJapMojo extends AbstractMojo {
      * The application ZIP file.
      */
     @Parameter(property = "jap.applicationZipFile",
-            defaultValue = "${project.artifactId}-${project.version}.zip", required = true)
+            defaultValue = "${project.build.directory}/${project.artifactId}-${project.version}-applicationZip.zip", required = true)
     private File applicationZipFile;
     /**
      * The Maven project.

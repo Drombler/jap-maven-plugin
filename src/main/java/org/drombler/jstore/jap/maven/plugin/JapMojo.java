@@ -16,19 +16,28 @@ package org.drombler.jstore.jap.maven.plugin;
 
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugin.MojoFailureException;
+import org.apache.maven.plugins.annotations.Component;
 import org.apache.maven.plugins.annotations.LifecyclePhase;
 import org.apache.maven.plugins.annotations.Mojo;
+import org.apache.maven.plugins.annotations.Parameter;
+import org.codehaus.plexus.archiver.Archiver;
+import org.codehaus.plexus.archiver.zip.ZipArchiver;
 
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 
 /**
- * Generates the Drombler FX application resources (currently only: applicationConfig.properties) in the ${project.build.outputDirectory} to be packaged in the application JAR.
+ * Generates the JAP file.
  */
 @Mojo(name = "jap", defaultPhase = LifecyclePhase.PACKAGE)
 public class JapMojo extends AbstractJapMojo {
 
+    @Component(role = Archiver.class, hint = "zip")
+    private ZipArchiver zipArchiver;
+
+    @Parameter(defaultValue = "${project.build.finalName}", required = true)
+    private String finalName;
 
     /**
      * {@inheritDoc }
@@ -46,8 +55,18 @@ public class JapMojo extends AbstractJapMojo {
         }
     }
 
-    private void createJapFile() {
-
+    private void createJapFile() throws IOException, MojoExecutionException {
+        Path targetDirectoryPath = getTargetDirectoryPath();
+        Path applicationZipFilePath = getApplicationZipFilePath();
+        Path applicationJsonFilePath;
+        if (Files.exists(applicationZipFilePath)) {
+            getLog().info("Adding " + applicationZipFilePath.getFileName().toString() + " as application.zip ...");
+            zipArchiver.addFile(applicationZipFilePath.toFile(), "application.zip");
+        } else {
+            throw new MojoExecutionException("applicationZipFile does not exist! Current value: " + applicationZipFilePath.toString());
+        }
+        zipArchiver.setDestFile(targetDirectoryPath.resolve(finalName + ".jap").toFile());
+        zipArchiver.createArchive();
     }
 
 }
