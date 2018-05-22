@@ -14,12 +14,15 @@
  */
 package org.drombler.jstore.jap.maven.plugin;
 
+import org.apache.maven.artifact.Artifact;
+import org.apache.maven.artifact.factory.ArtifactFactory;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugin.MojoFailureException;
 import org.apache.maven.plugins.annotations.Component;
 import org.apache.maven.plugins.annotations.LifecyclePhase;
 import org.apache.maven.plugins.annotations.Mojo;
 import org.apache.maven.plugins.annotations.Parameter;
+import org.apache.maven.project.MavenProject;
 import org.codehaus.plexus.archiver.Archiver;
 import org.codehaus.plexus.archiver.zip.ZipArchiver;
 
@@ -33,12 +36,18 @@ import java.nio.file.Path;
 @Mojo(name = "jap", defaultPhase = LifecyclePhase.PACKAGE)
 public class JapMojo extends AbstractJapMojo {
 
-    @Component(role = Archiver.class, hint = "zip")
-    private ZipArchiver zipArchiver;
 
     @Parameter(defaultValue = "${project.build.finalName}", required = true)
     private String finalName;
 
+    @Parameter(defaultValue = "${project}", readonly = true, required = true)
+    private MavenProject project;
+
+    @Component(role = Archiver.class, hint = "zip")
+    private ZipArchiver zipArchiver;
+
+    @Component
+    private ArtifactFactory artifactFactory;
     /**
      * {@inheritDoc }
      */
@@ -67,6 +76,9 @@ public class JapMojo extends AbstractJapMojo {
         }
         zipArchiver.setDestFile(targetDirectoryPath.resolve(finalName + ".jap").toFile());
         zipArchiver.createArchive();
+        Artifact buildArtifact = artifactFactory.createBuildArtifact(project.getGroupId(), project.getArtifactId(), project.getVersion(), project.getPackaging());
+        buildArtifact.setFile(zipArchiver.getDestFile());
+        project.setArtifact(buildArtifact);
     }
 
 }
