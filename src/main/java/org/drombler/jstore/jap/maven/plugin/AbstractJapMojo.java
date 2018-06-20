@@ -120,4 +120,7 @@ public abstract class AbstractJapMojo extends AbstractMojo {
         return applicationZipFile.toPath();
     }
 
+    public Path getApplicationJsonFilePath(Path outputDirPath) {
+        return outputDirPath.resolve("application.json");
+    }
 }
