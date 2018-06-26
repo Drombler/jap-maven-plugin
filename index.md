@@ -1,7 +1,6 @@
 Under Construction
 
-The _JAP Maven Plugin_ creates a platform-independent application packaging format and meta data
-using Maven tooling.
+The _JAP Maven Plugin_ creates a platform-independent application packaging format and meta data to be used by the [Drombler JStore](../drombler-jstore) components, using Maven tooling.
 
 ### Current Goals
 * Define a platform-independent application packaging format and meta data
