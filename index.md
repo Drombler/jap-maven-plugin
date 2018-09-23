@@ -10,4 +10,7 @@ The _JAP Maven Plugin_ creates a platform-independent application packaging form
 * Creates an application.json meta data file
 * Creates a ZIP-based package, which contains the application.json file and the application in a nested ZIP-file. 
 
+### Maven Plugin Site Documentation
+* [v0.1](0.1/docs/site/plugin-info.html)
+
 
