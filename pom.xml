@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+        COMMON DEVELOPMENT AND DISTRIBUTION LICENSE (CDDL) Notice
+
+The contents of this file are subject to the COMMON DEVELOPMENT AND DISTRIBUTION LICENSE (CDDL)
+Version 1.0 (the "License"); you may not use this file except in
+compliance with the License. A copy of the License is available at
+http://www.opensource.org/licenses/cddl1.txt
+
+The Original Code is Drombler.org. The Initial Developer of the
+Original Code is Florian Brunner (Sourceforge.net user: puce).
+Copyright 2012 Drombler.org. All Rights Reserved.
+
+Contributor(s): .
+-->
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>org.drombler</groupId>
+        <artifactId>drombler-oss-parent</artifactId>
+        <version>3.1</version>
+        <relativePath />
+    </parent>
+
+    <groupId>org.drombler.jstore</groupId>
+    <artifactId>jap-maven-plugin</artifactId>
+    <version>0.1</version>
+    <packaging>maven-plugin</packaging>
+
+    <name>JAP Maven Plugin</name>
+    <description>The Java Application Package Maven Plugin.</description>
+    <inceptionYear>2018</inceptionYear>
+    <!-- required for Javadoc (apidocs) linking -->
+    <url>http://www.drombler.org/jap-maven-plugin/${project.version}/docs/site</url>
+
+    <scm>
+        <connection>${scm.connection}</connection>
+        <developerConnection>${scm.developerConnection}</developerConnection>
+        <url>${scm.url}</url>
+        <tag>HEAD</tag>
+    </scm>
+
+    <licenses>
+        <license>
+            <name>COMMON DEVELOPMENT AND DISTRIBUTION LICENSE (CDDL) Version 1.0</name>
+            <distribution>repo</distribution>
+            <!--<url>http://java.sun.com/spl.html</url>-->
+            <url>../LICENSE.txt</url>
+        </license>
+    </licenses>
+
+    <distributionManagement>
+        <site>
+            <id>github</id>
+            <name>JAP Maven Plugin</name>
+            <url>${distributionManagement.url}/</url>
+        </site>
+    </distributionManagement>
+
+    <properties>
+        <plugin.compiler.version>3.7.0</plugin.compiler.version>
+        <plugin.jar.version>3.1.0</plugin.jar.version>
+
+
+        <!-- Dev Environment Defaults -->
+        <scm.connection>scm:git:https://github.com/Drombler/jap-maven-plugin.git</scm.connection>
+        <scm.developerConnection>scm:git:git@github.com:Drombler/jap-maven-plugin.git</scm.developerConnection>
+        <scm.url>https://github.com/Drombler/jap-maven-plugin</scm.url>
+        <!-- URLs to use with the standard site plugin with the git wagon -->
+        <distributionManagement.base.url>github:http://drombler.github.io/jap-maven-plugin/${project.version}
+        </distributionManagement.base.url>
+        <distributionManagement.url>${distributionManagement.base.url}/docs/site</distributionManagement.url>
+        <!-- URL to use with the GitHub site plugin -->
+        <!--<distributionManagement.parent.url>${project.version}/docs/site</distributionManagement.parent.url>-->
+        <!--<url.parent>http://www.drombler.org/jap-maven-plugin/${project.version}/docs/site</url.parent>-->
+
+        <!-- Reporting Defaults -->
+        <reporting.javadoc.skip>true</reporting.javadoc.skip>
+    </properties>
+
+    <!-- Not inherited!?? -->
+    <prerequisites>
+        <maven>${maven.version}</maven>
+    </prerequisites>
+
+
+    <build>
+        <plugins>
+            <plugin>
+                <artifactId>maven-plugin-plugin</artifactId>
+                <version>${plugin.plugin-plugin.version}</version>
+                <configuration>
+                    <goalPrefix>jap</goalPrefix>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>default-descriptor</id>
+                        <phase>process-classes</phase>
+                    </execution>
+                    <!-- if you want to generate help goal -->
+                    <execution>
+                        <id>help-goal</id>
+                        <goals>
+                            <goal>helpmojo</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+    <dependencies>
+        <dependency>
+            <groupId>org.drombler.jstore.protocol</groupId>
+            <artifactId>drombler-jstore-protocol</artifactId>
+            <version>0.3</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.maven</groupId>
+            <artifactId>maven-plugin-api</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.maven.plugin-tools</groupId>
+            <artifactId>maven-plugin-annotations</artifactId>
+            <!-- annotations are needed only to build the plugin -->
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.maven</groupId>
+            <artifactId>maven-project</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-jar-plugin</artifactId>
+            <type>maven-plugin</type>
+        </dependency>
+        <dependency>
+            <groupId>org.ops4j</groupId>
+            <artifactId>maven-pax-plugin</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-dependency-plugin</artifactId>
+            <version>2.4</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.codehaus.plexus</groupId>
+            <artifactId>plexus-io</artifactId>
+            <version>3.0.1</version>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+        </dependency>
+
+    </dependencies>
+    <reporting>
+        <plugins>
+            <plugin>
+                <artifactId>maven-plugin-plugin</artifactId>
+                <version>${plugin.plugin-plugin.version}</version>
+            </plugin>
+        </plugins>
+    </reporting>
+</project>
