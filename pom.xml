@@ -24,7 +24,7 @@ Contributor(s): .
 
     <groupId>org.drombler.jstore</groupId>
     <artifactId>jap-maven-plugin</artifactId>
-    <version>0.1</version>
+    <version>0.2-SNAPSHOT</version>
     <packaging>maven-plugin</packaging>
 
     <name>JAP Maven Plugin</name>
