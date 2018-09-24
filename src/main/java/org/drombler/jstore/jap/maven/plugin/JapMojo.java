@@ -82,7 +82,7 @@ public class JapMojo extends AbstractJapMojo {
         }
         zipArchiver.setDestFile(targetDirectoryPath.resolve(finalName + ".jap").toFile());
         zipArchiver.createArchive();
-        Artifact buildArtifact = artifactFactory.createBuildArtifact(project.getGroupId(), project.getArtifactId(), project.getVersion(), project.getPackaging());
+        Artifact buildArtifact = artifactFactory.createBuildArtifact(project.getGroupId(), project.getArtifactId(), project.getVersion(), "jap");
         buildArtifact.setFile(zipArchiver.getDestFile());
         project.setArtifact(buildArtifact);
     }
