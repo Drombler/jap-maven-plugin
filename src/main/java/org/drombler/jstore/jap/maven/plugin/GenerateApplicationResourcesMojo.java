@@ -33,7 +33,7 @@ import java.nio.file.Path;
 
 
 /**
- * Generates the Drombler FX application resources (currently only: applicationConfig.properties) in the ${project.build.outputDirectory} to be packaged in the application JAR.
+ * Generates the JAP resources (currently only: application.json) in the outputDirectory (default: ${project.build.directory}/generated-sources/jap) to be packaged in the JAP archive.
  */
 @Mojo(name = "generate-application-resources", defaultPhase = LifecyclePhase.GENERATE_RESOURCES)
 public class GenerateApplicationResourcesMojo extends AbstractJapMojo {

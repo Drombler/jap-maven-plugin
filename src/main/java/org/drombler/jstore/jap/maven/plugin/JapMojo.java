@@ -69,7 +69,7 @@ public class JapMojo extends AbstractJapMojo {
         Path applicationJsonFilePath = getApplicationJsonFilePath(getOutputDirectoryPath());
         Path applicationZipFilePath = getApplicationZipFilePath();
         if (Files.exists(applicationJsonFilePath)) {
-            getLog().info("Adding " + applicationJsonFilePath.getFileName().toString() + " as application.zip ...");
+            getLog().info("Adding " + applicationJsonFilePath.getFileName().toString() + " as application.json ...");
             zipArchiver.addFile(applicationJsonFilePath.toFile(), "application.json");
         } else {
             throw new MojoExecutionException("application.json file does not exist! Current value: " + applicationJsonFilePath.toString());
