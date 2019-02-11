@@ -18,13 +18,13 @@ Contributor(s): .
     <parent>
         <groupId>org.drombler</groupId>
         <artifactId>drombler-oss-parent</artifactId>
-        <version>3.1</version>
+        <version>3.2</version>
         <relativePath />
     </parent>
 
     <groupId>org.drombler.jstore</groupId>
     <artifactId>jap-maven-plugin</artifactId>
-    <version>0.1</version>
+    <version>0.2</version>
     <packaging>maven-plugin</packaging>
 
     <name>JAP Maven Plugin</name>
@@ -141,20 +141,16 @@ Contributor(s): .
         <dependency>
             <groupId>org.apache.maven.plugins</groupId>
             <artifactId>maven-dependency-plugin</artifactId>
-            <version>2.4</version>
+            <type>maven-plugin</type>
         </dependency>
 
-        <dependency>
-            <groupId>org.codehaus.plexus</groupId>
-            <artifactId>plexus-io</artifactId>
-            <version>3.0.1</version>
-        </dependency>
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-databind</artifactId>
         </dependency>
 
     </dependencies>
+
     <reporting>
         <plugins>
             <plugin>
